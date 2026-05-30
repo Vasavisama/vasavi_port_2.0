@@ -1,0 +1,370 @@
+/* AboutSection.module.css */
+
+.main {
+  background: #060608;
+  color: #FAFAF8;
+}
+
+.section {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 100px 6vw;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+.sectionLabel {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 107, 53, 0.6);
+  margin-bottom: 60px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.sectionLabel span {
+  color: rgba(250, 250, 248, 0.15);
+  font-size: 9px;
+}
+
+/* ─ About grid ─ */
+.aboutGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.aboutText {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s ease 0.1s, transform 0.9s ease 0.1s;
+}
+
+.sectionHeading {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(36px, 3.5vw, 56px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
+  color: #FAFAF8;
+}
+
+.sectionHeading em {
+  font-style: italic;
+  color: rgba(255, 140, 66, 0.85);
+}
+
+.aboutText p {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(250, 250, 248, 0.55);
+  margin-bottom: 20px;
+}
+
+.aboutText strong {
+  color: rgba(255, 140, 66, 0.9);
+  font-weight: 600;
+}
+
+.statRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 36px;
+}
+
+.stat {
+  padding: 8px 18px;
+  border: 1px solid rgba(255, 107, 53, 0.2);
+  border-radius: 100px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: rgba(255, 140, 66, 0.8);
+  background: rgba(255, 107, 53, 0.05);
+}
+
+/* ─ Skill cards ─ */
+.skillGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s ease 0.25s, transform 0.9s ease 0.25s;
+}
+
+/* ─ 3D Card ─ */
+.card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 28px 24px;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.15s ease-out;
+  transform-style: preserve-3d;
+  will-change: transform;
+  overflow: hidden;
+}
+
+.card:hover {
+  border-color: rgba(255, 107, 53, 0.2);
+  box-shadow: 0 16px 64px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,107,53,0.08);
+}
+
+.cardShine {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  transition: background 0.1s;
+  z-index: 1;
+}
+
+.skillIcon {
+  font-size: 20px;
+  color: rgba(255, 107, 53, 0.6);
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.skillLabel {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 107, 53, 0.7);
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 2;
+}
+
+.skillItems {
+  list-style: none;
+  position: relative;
+  z-index: 2;
+}
+
+.skillItems li {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(250, 250, 248, 0.6);
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.skillItems li:last-child {
+  border-bottom: none;
+}
+
+/* ─ Project cards ─ */
+.projectGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.projectCard {
+  padding: 36px 28px 28px;
+}
+
+.projectAccent {
+  position: absolute;
+  top: 0;
+  left: 28px;
+  width: 40px;
+  height: 2px;
+  border-radius: 0 0 2px 2px;
+  opacity: 0.8;
+}
+
+.projectYear {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  color: rgba(250, 250, 248, 0.2);
+  letter-spacing: 0.15em;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 2;
+}
+
+.projectTech {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 2;
+}
+
+.projectName {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: #FAFAF8;
+  margin-bottom: 16px;
+  line-height: 1.15;
+  position: relative;
+  z-index: 2;
+}
+
+.projectDesc {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(250, 250, 248, 0.45);
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.projectArrow {
+  font-size: 22px;
+  position: relative;
+  z-index: 2;
+  opacity: 0.5;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.projectCard:hover .projectArrow {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+/* ─ Contact ─ */
+.contactBlock {
+  display: flex;
+  gap: 100px;
+  align-items: flex-start;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s ease 0.1s, transform 0.9s ease 0.1s;
+}
+
+.contactHeading {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(40px, 4vw, 64px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #FAFAF8;
+  flex-shrink: 0;
+}
+
+.contactHeading em {
+  font-style: italic;
+  color: rgba(255, 140, 66, 0.85);
+}
+
+.contactLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 8px;
+}
+
+.contactLink {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 18px;
+  color: rgba(250, 250, 248, 0.5);
+  text-decoration: none;
+  transition: color 0.2s;
+  letter-spacing: 0.01em;
+}
+
+.contactLink:hover {
+  color: rgba(255, 140, 66, 0.9);
+}
+
+.contactSocials {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.socialBtn {
+  padding: 8px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 100px;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: rgba(250, 250, 248, 0.5);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.socialBtn:hover {
+  border-color: rgba(255, 107, 53, 0.4);
+  color: rgba(255, 140, 66, 0.9);
+  background: rgba(255, 107, 53, 0.06);
+}
+
+/* ─ Footer ─ */
+.footer {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 32px 6vw;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: rgba(250, 250, 248, 0.2);
+  text-transform: uppercase;
+}
+
+/* ─ Reveal animation ─ */
+.visible [data-reveal],
+[data-reveal].visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* applied by JS IntersectionObserver */
+:global(.visible) {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* ─ Responsive ─ */
+@media (max-width: 900px) {
+  .aboutGrid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .projectGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .contactBlock {
+    flex-direction: column;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .skillGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
