@@ -13,14 +13,28 @@ export default function VideoIntro() {
   const subtitleRef = useRef<HTMLDivElement>(null);
   const controlsRef = useRef<HTMLDivElement>(null);
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
+  const playCountRef = useRef(0);
 
-  const [muted, setMuted] = useState(true);
+  const [muted, setMuted] = useState(false);
   const [playing, setPlaying] = useState(true);
-  const [showSoundHint, setShowSoundHint] = useState(true);
+  const [showSoundHint, setShowSoundHint] = useState(false);
 
   useEffect(() => {
-    // Hide sound hint after 4s
-    const hintTimer = setTimeout(() => setShowSoundHint(false), 4000);
+    const startPlayback = async () => {
+      if (!videoRef.current || !bgVideoRef.current) return;
+
+      videoRef.current.muted = false;
+      bgVideoRef.current.muted = true;
+
+      try {
+        await Promise.all([videoRef.current.play(), bgVideoRef.current.play()]);
+        setPlaying(true);
+      } catch {
+        setPlaying(false);
+      }
+    };
+
+    startPlayback();
 
     // GSAP entrance timeline
     const tl = gsap.timeline({ delay: 0.3 });
@@ -58,18 +72,15 @@ export default function VideoIntro() {
       );
 
     return () => {
-      clearTimeout(hintTimer);
       tl.kill();
     };
   }, []);
 
   const toggleMute = () => {
-    if (!videoRef.current || !bgVideoRef.current) return;
+    if (!videoRef.current) return;
     const newMuted = !muted;
     videoRef.current.muted = newMuted;
-    bgVideoRef.current.muted = newMuted;
     setMuted(newMuted);
-    if (!newMuted) setShowSoundHint(false);
   };
 
   const togglePlay = () => {
@@ -78,10 +89,32 @@ export default function VideoIntro() {
       videoRef.current.pause();
       bgVideoRef.current.pause();
     } else {
+      if (videoRef.current.ended || playCountRef.current >= 2) {
+        playCountRef.current = 0;
+        videoRef.current.currentTime = 0;
+        bgVideoRef.current.currentTime = 0;
+      }
       videoRef.current.play();
       bgVideoRef.current.play();
     }
     setPlaying(!playing);
+  };
+
+  const handleVideoEnded = () => {
+    if (!videoRef.current || !bgVideoRef.current) return;
+
+    playCountRef.current += 1;
+
+    if (playCountRef.current < 2) {
+      videoRef.current.currentTime = 0;
+      bgVideoRef.current.currentTime = 0;
+      videoRef.current.play();
+      bgVideoRef.current.play();
+      return;
+    }
+
+    bgVideoRef.current.pause();
+    setPlaying(false);
   };
 
   const scrollToNext = () => {
@@ -99,7 +132,6 @@ export default function VideoIntro() {
           className={styles.bgVideo}
           src="/hero-video.mp4"
           autoPlay
-          loop
           muted
           playsInline
         />
@@ -119,9 +151,9 @@ export default function VideoIntro() {
           className={styles.mainVideo}
           src="/hero-video.mp4"
           autoPlay
-          loop
-          muted
+          muted={false}
           playsInline
+          onEnded={handleVideoEnded}
         />
         <div className={styles.videoGlow} />
       </div>
